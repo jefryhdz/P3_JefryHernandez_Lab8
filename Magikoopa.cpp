@@ -17,6 +17,19 @@ void Magikoopa::setColor(string color){
 Magikoopa::~Magikoopa(){
 
 }
-int Magikoopa::Ataque(Minion* minion){
-  return 0;
+int Magikoopa::Ataque(Minion* minion,bool ataque){
+  int attack;
+  if (ataque) {
+    HP+=25;
+    if (dynamic_cast<Flying*>(minion)!=NULL) {
+      attack= Fuerza+(Fuerza*0.5);
+      attack*=minion->getDefensa();
+    }
+  }else{
+    if (dynamic_cast<Flying*>(minion)!=NULL) {
+        attack= Fuerza+(Fuerza*0.5);
+        attack*=minion->getDefensa();
+    }
+  }
+  return attack;
 }

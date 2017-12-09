@@ -3,6 +3,7 @@
 #include <vector>
 #include <sstream>
 #include "Flying.h"
+#include "Melee.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ class Boo : public Flying{
 		void setColor(string);
 
 		~Boo();
-		int Ataque(Minion*);
+		int Ataque(Minion*,bool);
 
 };
 #endif

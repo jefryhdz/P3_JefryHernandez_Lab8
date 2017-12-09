@@ -21,7 +21,7 @@ class Paratroopa : public Flying{
 		void setColor(string);
 
 		~Paratroopa();
-		int Ataque(Minion*);
+		int Ataque(Minion*,bool);
 
 };
 #endif

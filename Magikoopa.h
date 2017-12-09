@@ -3,6 +3,7 @@
 #include <vector>
 #include <sstream>
 #include "Range.h"
+#include "Flying.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ class Magikoopa : public Range{
 		void setColor(string);
 
 		~Magikoopa();
-		int Ataque(Minion*);
+		int Ataque(Minion*,bool);
 
 };
 #endif

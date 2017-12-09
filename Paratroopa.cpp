@@ -16,6 +16,16 @@ Paratroopa::~Paratroopa(){
 
 }
 
-int Paratroopa::Ataque(Minion* minion){
-  return 0;
+int Paratroopa::Ataque(Minion* minion,bool ataque){
+  int attack;
+  if (ataque) {
+    Defensa =0.80;
+  }
+  if (dynamic_cast<Melee*>(minion)!=NULL) {
+    attack = (Fuerza+(Fuerza*0.5));
+    attack*= minion->getDefensa();
+  }else{
+    attack = (Fuerza*(minion->getDefensa()));
+  }
+  return attack;
 }

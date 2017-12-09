@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <sstream>
+
+#include "Melee.h"
 #include "Minion.h"
 
 using namespace std;

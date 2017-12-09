@@ -2,6 +2,10 @@
 #include <vector>
 #include <iostream>
 #include <cstdlib>
+#include<math.h>
+#include<time.h>
+#include<ctime>
+#include <fstream>
 
 #include "Hammer.h"
 #include "Boo.h"
@@ -25,6 +29,7 @@ int MenuRange();
 double validarHP(int,int);
 vector<Minion*>Eliminar(vector<Minion*>);
 void Pelear(vector<Minion*>,vector<Minion*>);
+void Escribir(string);
 
 int main() {
   vector<Minion*>lista;
@@ -32,17 +37,18 @@ int main() {
   vector<Equipo*>equipos;
   int numero=0;
   Minion* minion;
-  int resp = Menu();
+int resp;
   do {
+     resp = Menu();
+    int menu=-1;
 
-    int menu=Menutipo();
     int menu2;
     double HP;
     string nombre;
-    cout<<"Ingrese el nombre"<<endl;
-    cin>>nombre;
-
     if (resp==1) {
+      menu=Menutipo();
+      cout<<"Ingrese el nombre"<<endl;
+      cin>>nombre;
       if (menu==1) {
         string intimidacion;
         menu2=MenuMelee();
@@ -130,7 +136,7 @@ int main() {
             cout<<"Ingrese la posicion para agregar a un equipo"<<endl;
             cin>>eleccion;
             replied=atoi(eleccion.c_str());
-          } while(replied<0&&replied>inutilizados.size());
+          } while(replied<0||replied>inutilizados.size());
           minio= inutilizados.at(replied);
           if (equipos.size()>0) {
             for (int i = 0; i < equipos.size(); i++) {
@@ -150,7 +156,7 @@ int main() {
           }
           cout<<"Desea agregar otro [S/N]"<<endl;
           cin>>answer;
-        } while(answer!='N'||answer!='N');
+        } while(answer=='S'||answer!='s');
       }
     }else if (resp==4) {
       if (equipos.size()>0&&inutilizados.size()>0) {
@@ -230,7 +236,7 @@ int Menutipo(){
     cout<<"3. Range"<<endl;
     cin>>seleccion;
     resp = atoi(seleccion.c_str());
-  } while(resp<1&&resp>3);
+  } while(resp<1||resp>3);
   return resp;
 }
 int MenuMelee(){
@@ -242,7 +248,7 @@ int MenuMelee(){
     cout<<"2. Chain"<<endl;
     cin>>seleccion;
     resp = atoi(seleccion.c_str());
-  } while(resp<1&&resp>2);
+  } while(resp<1||resp>2);
   return resp;
 }
 int MenuFlying(){
@@ -254,7 +260,7 @@ int MenuFlying(){
     cout<<"2. Paratroopa"<<endl;
     cin>>seleccion;
     resp = atoi(seleccion.c_str());
-  } while(resp<1&&resp>2);
+  } while(resp<1||resp>2);
   return resp;
 }
 int MenuRange(){
@@ -266,24 +272,22 @@ int MenuRange(){
     cout<<"2. Magikoopa"<<endl;
     cin>>seleccion;
     resp = atoi(seleccion.c_str());
-  } while(resp<1&&resp>2);
+  } while(resp<1||resp>2);
   return resp;
 
 }
 
 int Menu(){
-  int ans;
-  string seleccion;
-  do {
+  int ans=-1;
+   while(ans<1||ans>6){
     cout<<"1. Agregar un minion"<<endl;
     cout<<"2. Eliminar un minion"<<endl;
     cout<<"3. Crear equipos"<<endl;
     cout<<"4. Modificar equipos"<<endl;
     cout<<"5. Simulacion de pelea"<<endl;
     cout<<"6. Salir"<<endl;
-    cin>>seleccion;
-    ans = atoi(seleccion.c_str());
-  } while(ans<1&&ans>6);
+    cin>>ans;
+  }
   return ans;
 }
 
@@ -294,34 +298,108 @@ double validarHP(int menor,int mayor){
     cout<<"Ingrese un numero entre "<<menor<<" y "<<mayor<<endl;
     cin>>seleccion;
     numero = atoi(seleccion.c_str());
-  } while(numero<menor&&numero>mayor);
+  } while(numero<menor||numero>mayor);
   return numero;
 }
 
 vector<Minion*>Eliminar(vector<Minion*> lista){
-  string seleccion;
-  for (int i = 0; i < lista.size(); i++) {
-    cout<<i<<". "<<lista.at(i)->getNombre()<<endl;
+  if (lista.size()>0) {
+    string seleccion;
+    for (int i = 0; i < lista.size(); i++) {
+      cout<<i<<". "<<lista.at(i)->getNombre()<<endl;
+    }
+    int resp;
+    do {
+      cout<<"Ingrese la posicion del minion a eliminar"<<endl;
+      cin>>seleccion;
+      resp=atoi(seleccion.c_str());
+    } while(resp<0||resp>lista.size());
+    lista.erase(lista.begin()+resp);
   }
-  int resp;
-  do {
-    cout<<"Ingrese la posicion del minion a eliminar"<<endl;
-    cin>>seleccion;
-    resp=atoi(seleccion.c_str());
-  } while(resp>=0&&resp<lista.size());
-  lista.erase(lista.begin()+resp);
   return lista;
 }
 
 void Pelear(vector<Minion*> lista1,vector<Minion*>lista2){
   int conta=0,contb=0;
+  int vel;
+  string escribir;
+  bool ataque=false;
   for (int i = 1; i < 7; i++) {
+    int cont=1;
+    int rand1 = 1+rand()%5;
+    int rand2 = 1+rand()%5;
     while(lista1.at(i)->getHP()>0&&lista2.at(i)->getHP()>0){
-
+      if (cont%2!=0) {
+        if (rand1==cont) {
+          ataque=true;
+          escribir="Ataque especial equipo 1";
+          Escribir(escribir);
+        }
+        vel= 1+rand()%10;
+        if (vel<=lista2.at(i)->getVelocidad()) {
+          lista1.at(i)->Ataque(lista2.at(i),ataque);
+          escribir= "Acerto el golpe equipo 1";
+          Escribir(escribir);
+        }else{
+          escribir= "Fallo el ataque equipo 1";
+          Escribir(escribir);
+        }
+      }else{
+        if (rand2==cont) {
+          ataque=true;
+          escribir="Ataque especial equipo 2";
+          Escribir(escribir);
+        }
+        vel= 1+rand()%10;
+        if (vel<=lista1.at(i)->getVelocidad()) {
+          lista2.at(i)->Ataque(lista1.at(i),ataque);
+          escribir= "Acerto el golpe equipo 2";
+          Escribir(escribir);
+        }else{
+          escribir= "Fallo el ataque equipo 2";
+          Escribir(escribir);
+        }
+      }
     }if (lista1.at(i)->getHP()==0) {
       contb++;
     }else{
       conta++;
     }
+  }
+  if (conta==contb) {
+    int rand1 = 1+rand()%5;
+    int rand2 = 1+rand()%5;
+    int cont=1;
+    while(lista1.at(0)->getHP()>0&&lista2.at(0)->getHP()>0){
+      if (cont%2!=0) {
+        if (rand1==cont) {
+          ataque=true;
+        }
+        vel= 1+rand()%10;
+        if (vel<=lista2.at(0)->getVelocidad()) {
+          lista1.at(0)->Ataque(lista2.at(0),ataque);
+        }
+      }else{
+        if (rand2==cont) {
+          ataque=true;
+        }
+        vel= 1+rand()%10;
+        if (vel<=lista1.at(0)->getVelocidad()) {
+          lista2.at(0)->Ataque(lista1.at(0),ataque);
+        }
+      }
+      cont++;
+    }if (lista1.at(0)->getHP()==0) {
+      contb++;
+    }else{
+      conta++;
+    }
+  }
+}
+void Escribir(string Bitacora){
+  ofstream archivo("LOG.txt", fstream::app | std::ios::out);
+  if (archivo.is_open()) {
+    archivo << "\n"<<Bitacora;
+    archivo.close();
   }
 }

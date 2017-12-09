@@ -3,6 +3,7 @@
 #include <vector>
 #include <sstream>
 #include "Melee.h"
+#include "Range.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ class Goomba : public Melee{
 		void setSize(string);
 
 		~Goomba();
-		int Ataque(Minion*);
+		int Ataque(Minion*,bool);
 
 };
 #endif

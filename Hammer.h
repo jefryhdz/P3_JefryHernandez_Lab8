@@ -2,7 +2,12 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include<math.h>
+#include<time.h>
+#include<ctime>
 #include "Range.h"
+#include "Flying.h"
+
 
 using namespace std;
 
@@ -21,7 +26,7 @@ class Hammer : public Range{
 		void setMartillos(double);
 
 		~Hammer();
-		int Ataque(Minion*);
+		int Ataque(Minion*,bool);
 
 };
 #endif

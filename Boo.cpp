@@ -19,6 +19,16 @@ Boo::~Boo(){
 
 }
 
-int Boo::Ataque(Minion* minion){
-
+int Boo::Ataque(Minion* minion,bool poder){
+  int ataque;
+  if (poder) {
+    Velocidad =0.90;
+  }
+  if (dynamic_cast<Melee*>(minion)!=NULL) {
+    ataque = (Fuerza+(Fuerza*0.5));
+    ataque*= minion->getDefensa();
+  }else{
+    ataque = (Fuerza*(minion->getDefensa()));
+  }
+  return ataque;
 }

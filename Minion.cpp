@@ -61,6 +61,6 @@ void Minion::setFuerza(double fuerz){
 Minion::~Minion(){
 }
 
-int Minion::Ataque(Minion* minion){
+int Minion::Ataque(Minion* minion,bool ataque){
   return 0;
 }

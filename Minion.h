@@ -44,7 +44,7 @@ class Minion{
     void setFuerza(double);
 
 		virtual~Minion();
-		virtual int Ataque(Minion*);
+		virtual int Ataque(Minion*,bool);
 
 };
 #endif

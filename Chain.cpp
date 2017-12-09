@@ -15,6 +15,22 @@ void Chain::setColor(string Color){
 
 Chain::~Chain(){
 }
-int Chain::Ataque(Minion* minion){
-  return 0;
+int Chain::Ataque(Minion* minion,bool ataque){
+  int attack;
+  if (ataque) {
+    attack=Fuerza+20;
+    if (dynamic_cast<Range*>(minion)!=NULL) {
+      attack+=(attack*0.5);
+    }
+    attack*=minion->getDefensa();
+  }else{
+    attack=Fuerza;
+    if (dynamic_cast<Range*>(minion)!=NULL) {
+      attack+=(attack*0.5);
+    }
+    attack*=minion->getDefensa();
+  }
+
+  return attack;
+
 }

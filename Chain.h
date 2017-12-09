@@ -2,7 +2,9 @@
 #include <string>
 #include <vector>
 #include <sstream>
+
 #include "Melee.h"
+#include "Range.h"
 
 using namespace std;
 
@@ -21,7 +23,7 @@ class Chain : public Melee{
 		void setColor(string);
 
 		~Chain();
-		int Ataque(Minion*);
+		int Ataque(Minion*,bool);
 
 };
 #endif
