@@ -6,6 +6,8 @@
 #include<time.h>
 #include<ctime>
 #include <fstream>
+#define rechcast reinterpret_cast<const char *>
+#define recast reinterpret_cast<char *>
 
 #include "Hammer.h"
 #include "Boo.h"
@@ -31,7 +33,7 @@ vector<Minion*>Eliminar(vector<Minion*>);
 void Pelear(vector<Minion*>,vector<Minion*>);
 void Escribir(string);
 
-int main() {
+int main(int argc, char* argv[]) {
   vector<Minion*>lista;
   vector<Minion*>inutilizados;
   vector<Equipo*>equipos;
@@ -220,8 +222,17 @@ int resp;
           }
         }
       } while(salir!=1);
+    }string fileName;
+    fileName = "object.bin";
+    ofstream file(fileName.c_str(), ios::binary | ios::out);
+    if(!file.is_open()){
+        cout<<"Can't open file!" <<endl;
+        return 1;
     }
-
+    for (int i = 0; i < lista.size(); i++) {
+      file.write(rechcast(&lista.at(i)),sizeof(lista.at(i)));
+    }
+    file.close();
   } while(resp!=6);
     return 0;
 }
@@ -337,7 +348,7 @@ void Pelear(vector<Minion*> lista1,vector<Minion*>lista2){
         }
         vel= 1+rand()%10;
         if (vel<=lista2.at(i)->getVelocidad()) {
-          lista1.at(i)->Ataque(lista2.at(i),ataque);
+          lista2.at(i)->setHP(lista2.at(i)->getHP()-lista1.at(i)->Ataque(lista2.at(i),ataque));
           escribir= "Acerto el golpe equipo 1";
           Escribir(escribir);
         }else{
@@ -352,7 +363,7 @@ void Pelear(vector<Minion*> lista1,vector<Minion*>lista2){
         }
         vel= 1+rand()%10;
         if (vel<=lista1.at(i)->getVelocidad()) {
-          lista2.at(i)->Ataque(lista1.at(i),ataque);
+          lista1.at(i)->setHP(lista1.at(i)->getHP()-lista2.at(i)->Ataque(lista1.at(i),ataque));
           escribir= "Acerto el golpe equipo 2";
           Escribir(escribir);
         }else{
