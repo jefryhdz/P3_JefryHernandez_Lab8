@@ -4,7 +4,6 @@ Goomba::Goomba(string pnombre,int pbatalla,double pexp,double pHP,double pdefens
   this->size=psize;
 }
 Goomba::Goomba(){
-
 }
 string Goomba::getSize(){
   return size;

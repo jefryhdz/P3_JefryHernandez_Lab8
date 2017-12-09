@@ -12,7 +12,7 @@ class Minion{
 	protected:
 		string nombre;
 		int batalla;
-		double exp;
+		double Exp;
     double HP;
     double Defensa;
     double Velocidad;

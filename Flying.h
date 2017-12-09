@@ -14,7 +14,7 @@ class Flying : public Minion{
 		string vuelo;
 
 	public:
-		Flying(string,int,double,double,double,double,double,double,string);
+		Flying(string,int,double,double,double,double,double,string);
 		Flying();
 
 		string getVuelo();

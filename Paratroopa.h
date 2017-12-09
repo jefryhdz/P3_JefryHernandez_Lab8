@@ -14,7 +14,7 @@ class Paratroopa : public Flying{
 		string color;
 
 	public:
-		Paratroopa(string,int,double,double,double,double,double,double,string,string);
+		Paratroopa(string,int,double,double,double,double,double,string,string);
 		Paratroopa();
 
 		string getColor();

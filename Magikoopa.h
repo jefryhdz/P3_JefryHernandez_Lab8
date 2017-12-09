@@ -14,7 +14,7 @@ class Magikoopa : public Range{
 		string Color;
 
 	public:
-		Magikoopa(string,int,double,double,double,double,double,double,double,string);
+		Magikoopa(string,int,double,double,double,double,double,double,string);
 		Magikoopa();
 
 		string getColor();

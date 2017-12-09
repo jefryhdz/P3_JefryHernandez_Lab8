@@ -14,7 +14,7 @@ class Range  : public Minion{
 		double rango;
 
 	public:
-		Range(string,int,double,double,double,double,double,double,double);
+		Range(string,int,double,double,double,double,double,double);
 		Range();
 
 		double getRango();

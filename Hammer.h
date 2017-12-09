@@ -14,7 +14,7 @@ class Hammer : public Range{
 		double martillos;
 
 	public:
-		Hammer(string,int,double,double,double,double,double,double,double,double);
+		Hammer(string,int,double,double,double,double,double,double,double);
 		Hammer();
 
 		double getMartillos();

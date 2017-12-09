@@ -3,7 +3,7 @@
 Minion::Minion(string pnombre,int pbatalla,double pexp,double pHP,double pdefensa,double pvelocidad,double pfuerza){
   nombre= pnombre;
   batalla=pbatalla;
-  exp=pexp;
+  Exp=pexp;
   HP=pHP;
   Defensa=pdefensa;
   Velocidad=pvelocidad;
@@ -27,10 +27,7 @@ void Minion::setBatalla(int Batalla){
 }
 
 double Minion::getExp(){
-  return exp;
-}
-void Minion::setExp(double Exp){
-  this->exp=Exp;
+  return Exp;
 }
 
 double Minion::getHP(){
@@ -64,6 +61,6 @@ void Minion::setFuerza(double fuerz){
 Minion::~Minion(){
 }
 
-int Minion::Ataque(Minion*){
+int Minion::Ataque(Minion* minion){
   return 0;
 }

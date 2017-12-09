@@ -14,8 +14,8 @@ class Boo : public Flying{
 		string color;
 
 	public:
-		Flying(string,int,double,double,double,double,double,double,string,string);
-		Flying();
+		Boo(string,int,double,double,double,double,double,string,string);
+		Boo();
 
 		string getColor();
 		void setColor(string);
