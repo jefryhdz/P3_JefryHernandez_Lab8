@@ -1,6 +1,6 @@
-main:    main.cpp Minion.o Melee.o Flying.o Range.o Goomba.o Chain.o Boo.o Paratroopa.o Hammer.o Magikoopa.o 
-	g++ main.cpp Minion.o Melee.o Flying.o Range.o Goomba.o Chain.o Boo.o Paratroopa.o Hammer.o Magikoopa.o -o main
-main.o:	main.cpp Minion.h Melee.h Flying.h Range.h Goomba.h Chain.h Boo.h Paratroopa.h Hammer.h Magikoopa.h 
+main:    main.cpp Minion.o Melee.o Flying.o Range.o Goomba.o Chain.o Boo.o Paratroopa.o Hammer.o Magikoopa.o Equipo.o
+	g++ main.cpp Minion.o Melee.o Flying.o Range.o Goomba.o Chain.o Boo.o Paratroopa.o Hammer.o Magikoopa.o  Equipo.o -o main
+main.o:	main.cpp Minion.h Melee.h Flying.h Range.h Goomba.h Chain.h Boo.h Paratroopa.h Hammer.h Magikoopa.h Equipo.h
 	g++ -c main.cpp
 Minion:	Minion.cpp Minion.h
 	g++ -c Minion.cppMelee:	Melee.cpp Melee.h
@@ -13,5 +13,7 @@ Minion:	Minion.cpp Minion.h
 	g++ -c Paratroopa.cppHammer:	Hammer.cpp Hammer.h
 	g++ -c Hammer.cppMagikoopa:	Magikoopa.cpp Magikoopa.h
 	g++ -c Magikoopa.cpp
+	g++ -c Equipo.cpp
+
 clean:
-	rm  *.o main 
+	rm  *.o main
